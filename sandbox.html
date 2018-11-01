@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en-us">
+   <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brad R. Allen HTML Sandbox</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/sandbox.css">
+</head>
+<body>
+  <div id="container" class="sand">
+  <header>
+  </header>
+  <main>
+    <section>
+      <h1>Source Code</h1>
+      <button id="executeBtn">Execute Code</button>
+      <form>
+        <textarea id="sourceCode">
+          <html>
+          <head>
+            <title>My Sandbox Code</title>
+          </head>
+          <body>
+            <h1>Welcome Coders!</h1>
+            <p>Write HTML, Javascript or CSS on the left & click run code!</p>
+          </body> 
+          </html>
+        </textarea>
+      </form>
+    </section>
+    <section>
+      <h1>Output</h1>
+      <iframe name="targetCode" id="targetCode"></iframe>
+    </section>
+  </main>
+ </div>
+  <script>
+    //get specific objective and page from querystring if present
+    function getQueryString() {
+      var url = new URL(window.location.href);
+      var objective = url.searchParams.get('objective');
+      var page = url.searchParams.get('page');
+      return {objective: objective, page: page};
+    }
+
+    function executeCode() {
+      var content = document.getElementById('sourceCode').value;
+      var iframe = document.getElementById('targetCode');
+      //not quite sure what this line does
+      iframe = (iframe.contentWindow)?iframe.contentWindow:(iframe.contentDocument)? iframe.contentDocument.document: 
+      iframe.contentDocument;
+
+      iframe.document.open();
+      iframe.document.write(content);
+      iframe.document.close();
+      return false;
+    }
+    //creaate onclick event for the run code button
+    document.getElementById('executeBtn').onclick = executeCode;
+    
+    var qs = getQueryString();
+    if (qs.objective && qs.page) {
+      var xhttp = new XMLHttpRequest();
+      
+      xhttp.onreadystatechange = function() {
+        var target =  document.getElementById("sourceCode");
+        if (this.readyState == 4 && this.status == 200) {
+          target.innerHTML = xhttp.responseText;
+          executeCode();
+        } else {
+          target.innerHTML = '<h1>Error</h1>';
+        }
+      }
+      
+      xhttp.open('GET', qs.objective + '/' + qs.page + '.html', true);
+      xhttp.send();
+    }
+  </script>
+</body>
+</html>

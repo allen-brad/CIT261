@@ -1,0 +1,174 @@
+/* created by Brad R. Allen */
+/* clean defaults based on the HTML5 Boilerplate v6.0.1 | MIT License | https://html5boilerplate.com/ */
+
+html {
+    font-size: 1em;
+    line-height: 1.4;
+}
+
+::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+audio, canvas, iframe, img, svg, video {
+    vertical-align: middle;
+}
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+textarea {
+    resize: vertical;
+}
+
+/*Color pallet:
+dark blue #001932 | orange #FF6600 | grey #757575 | light grey #F2F2F2 | White #ffffff
+ */
+
+html {
+    box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+body {
+    margin: 0;
+    background: #001932;
+}
+header{
+    margin: 10px auto 0px;
+    width: 90%;
+    max-width: 960px;
+    border-radius: 10px;
+}
+header h1, header h2{
+  font-family: 'zilla slab', sans-serif;
+  font-weight: 700;
+  text-align: center;
+  color:#ffc728;
+}
+#carddeck {
+    margin: 10px auto 0px;
+    padding: 10px 0px;
+    width: 90%;
+    max-width: 960px;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-flow: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.sand {
+  display:block;
+}
+
+/*fip card*/
+
+.card{
+  width: 250px;
+  height: 320px;
+  margin: 5px;
+  background: none;
+}
+
+.thecard{
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  transform-style: preserve-3d;
+  transition: all 0.8s ease;
+}
+
+.thecard.flipped{
+    transform: rotateY(180deg);
+
+}
+
+/* front of card shows by default */
+.thefront{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  backface-visibility: hidden;
+  overflow: hidden;
+  background: #ffc728;
+  color: #000;
+}
+
+/* back of card shows onclick(flipCard(DivID)) */
+.theback{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  backface-visibility: hidden;
+  overflow: hidden;
+  background: #fafafa;
+  color: #333;
+  text-align: center;
+  transform: rotateY(180deg);
+  border: 1px solid #001932;
+}
+
+/* for styling of the card, NOT part of the flip code */
+.thefront h1, .theback h1{
+  font-family: 'zilla slab', sans-serif;
+  padding: 20px 30px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.thefront p, .theback p{
+  font-family: 'zilla slab', sans-serif;
+  padding: 15px 15px;
+  font-weight: 400;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+p.flipnote {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 3px;
+  padding: 5px;
+  font-size: .8rem;
+}
+/*medium size Media Query*/
+@media only screen and (min-width: 43.75em) {
+  /* so minimum width is 700px i.e. 43.75 x 16px  */
+  #carddeck {
+    flex-flow: row;
+    flex-wrap: wrap;
+  }
+}

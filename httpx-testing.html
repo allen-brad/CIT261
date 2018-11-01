@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+ <meta charset="UTF-8"> 
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="stylesheet" href="css/normalize.css">
+ <link rel="stylesheet" href="css/screen.css">
+ <script src="./scripts/scriptCards.js" ></script>
+
+ <title>CIT 261 Card Test!!</title>
+</head>
+<body>
+  <div id="carddeck">
+  </div>
+  <script>
+    document.body.onload = getObjectives;
+
+  function getObjectives() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange=function() {
+    if (this.readyState == 4 && this.status == 200) {
+      var json = xhttp.responseText;
+      obj = JSON.parse(json);
+      console.log(obj[1][2]);
+      console.log(obj[1].objectiveDesc);
+      text = "";
+      obj.forEach(function(object){
+        text += 'Desc:' + object.objectiveDesc + '</br>';
+      });
+      
+      
+      document.getElementById("carddeck").innerHTML = text;
+    }
+  };
+  xhttp.open("GET", "http://localhost/bradrallen/objectives/?action=getObjectives&t=" + Math.random(), true);
+  xhttp.send();
+}  
+
+  </script>
+</body>
+</html>

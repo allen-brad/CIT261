@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<!--
+created by Brad R. Allen
+-->
+<html>
+  <head>
+    <title>JS Events</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/sandbox.css">
+    <script src="./scripts/scriptOutput.js"></script>
+  </head>
+  <body>
+    <div>Example Events</div>
+    <div id="test">I"m here</div>
+      <textarea id="scriptOutput"></textarea>
+      
+    <script>
+      var text ="Just some stuff";
+       document.getElementById("test").addEventListener("click", function( event ) {
+        // display the current click count inside the clicked div
+        event.target.textContent = "click count: " + event.detail;
+      }, false);
+      
+      show(text);
+    </script>
+  </body>
+</html>

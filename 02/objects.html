@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<!--
+created by Brad R. Allen
+-->
+<html>
+  <head>
+    <title>JS LOOPS</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/sandbox.css">
+    <script src="./scripts/scriptOutput.js"></script>
+  </head>
+  <body>
+    <div>Example Loops, Conditional Statements, Functions, Variables, Parameters, Arrays and Associative Arrays</div>
+      <textarea id="scriptOutput"></textarea>
+    <script>
+      
+      //example of simple array
+      var group3 = ["Brad R. Allen","Lauren Allred","Jacob Barrera Loredo","Juan del Prado", "Keith Jacobson","Kent Roper","Alex Schwitters","Hayden Simmons"];
+      
+      //example of multidimensional array
+      var brands = [["Volkswagen",142498], ["Renault",95781], ["Audi",63154], ["Peugot",58294], ["Ford",58038], ["Opel / Vauxhall",55403],["Mercedes",52321],["Skoda",52241],["BMW",48147],["Toyota",48049]];
+      
+      //function to calculate the percentage of registrations
+      var percentage = new Function('percent','percentOf', 'return ((percent/percentOf)*100)');
+      
+      //get total car registartions from brands array to be used when calculating brand percentage
+      var totalRegistrations = 0;
+      brands.forEach(function(brand){
+        totalRegistrations += brand[1];
+      });
+      
+      //example of simple for loop
+      var text = "Members of Group 03 include:\n";
+      for (i = 0; i < group3.length; i++) {
+        text += group3[i] + '\n';
+        
+        //example of conditional statement
+        if (i === group3.length-1){
+          text += "\n"; //add extra line break on last member of the group
+        }
+      }
+      
+      //example of forEach iteration through a multidimenisonal array
+      text += "Best-selling car brands in EU-28 in August 2018, based on new-car registrations:\n";
+      brands.forEach(function(brand){
+        text += brand[0] + ' = ' + brand[1].toLocaleString() + ' which is ' + percentage(brand[1],totalRegistrations).toFixed(2) + '%\n';
+      });
+      
+      show(text);
+    </script>
+  </body>
+</html>

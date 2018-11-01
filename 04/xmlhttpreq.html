@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!--
+created by Brad R. Allen
+-->
+<html>
+  <head>
+    <title>XMLHTTPRequest</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/sandbox.css">
+    <script src="./scripts/scriptOutput.js"></script>
+  </head>
+  <body>
+    <div>
+      <h1>Using XMLHTTPRequest to Consume a JSON Web Service</h1>
+      <button type="button" onclick="createNewObj()">Create New Objective</button>
+      <textarea id="scriptOutput"></textarea>
+    </div>
+    <script>
+      // Sending and receiving data in JSON format using POST method
+      function createNewObj (){
+        var xhr = new XMLHttpRequest();
+        var url = "http://localhost/cit261/objectives/?action=addObjective";
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                //var json = JSON.parse(xhr.responseText);
+                //console.log(json.email + ", " + json.password);
+                show(xhr.responseText)
+            }
+        };
+        var data = JSON.stringify([{"objectiveNum": "14", "objectiveDesc": "this is a test description with []", "fluencyLevel":"not graded"}]);
+        xhr.send(data);
+      }
+    </script>
+  </body>
+</html>
