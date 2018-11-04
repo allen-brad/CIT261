@@ -8,7 +8,7 @@ function getObjectives(){
 // Create a connection object from the cit261 connection function
     $db = cit261Connect();
 // The SQL statement to be used with the database
-    $sql = 'SELECT objectives.objectiveID, objectives.objectiveNum, objectives.objectiveDesc , objectiveFluency.fluencyLevel
+    $sql = 'SELECT * , objectiveFluency.fluencyLevel
 FROM objectives
 	INNER JOIN objectiveFluency on objectives.fluencyID = objectiveFluency.fluencyID
 WHERE objectives.fluencyID = objectiveFluency.fluencyID' ;//'SELECT * FROM objectives ORDER BY objectiveNum ASC';
@@ -30,7 +30,7 @@ function getObjectivesURLs(){
 // Create a connection object from the cit261 connection function
     $db = cit261Connect();
 // The SQL statement to be used with the database
-    $sql = 'SELECT * FROM objectiveUrls ORDER BY urlID ASC';
+    $sql = 'SELECT * FROM objectiveUrls ORDER BY objectiveID ASC';
     
 // The next line creates the prepared statement using the connection
     $stmt = $db->prepare($sql);

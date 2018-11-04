@@ -90,6 +90,7 @@ header h1, header h2{
   height: 320px;
   margin: 5px;
   background: none;
+  font-family: 'zilla slab', sans-serif;
 }
 
 .thecard{
@@ -105,7 +106,6 @@ header h1, header h2{
 
 .thecard.flipped{
     transform: rotateY(180deg);
-
 }
 
 /* front of card shows by default */
@@ -141,28 +141,41 @@ header h1, header h2{
 
 /* for styling of the card, NOT part of the flip code */
 .thefront h1, .theback h1{
-  font-family: 'zilla slab', sans-serif;
-  padding: 20px 30px;
+  padding: 10px 10px 3px 10px;
   font-weight: 500;
   text-align: center;
 }
 
 .thefront p, .theback p{
-  font-family: 'zilla slab', sans-serif;
-  padding: 15px 15px;
+  margin-top: 7px;
+  padding: 3px 10px;
   font-weight: 400;
   font-size: 1.1rem;
   text-align: center;
 }
 
+.objectivestatus {
+  position: absolute;
+  bottom: 7%;
+  left: 50%;
+  width: 100%;
+  transform: translateX(-50%);
+  text-align: center;
+}
 p.flipnote {
   position: absolute;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
+  backface-visibility: hidden;
   margin: 3px;
   padding: 5px;
   font-size: .8rem;
+}
+
+p.usage {
+  padding: auto 15px;
+  text-align: left;
 }
 /*medium size Media Query*/
 @media only screen and (min-width: 43.75em) {

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Object-oriented JavaScript class further exercises</title>
+       <script src="../scripts/utilities.js" ></script>
+  </head>
+
+  <body>
+    <p>This example creates an Asset object and a ScubTankAsset that extends the Asset object.</p>
+
+  </body>
+
+    <script>
+      // object creation
+      function Asset(make, model, serialnumber, condition, startdate) {
+        //members
+        this.make = make;
+        this.model = model;
+        this.serialnumber = serialnumber;
+        this.condition = condition;
+        this.startdate = startdate;
+        
+        //methods
+        this.snapshot = function() {
+          var initialDate = this.startdate;
+          var string = 'Make = ' + this.make + '\n' + 
+                       'Model = ' + this.model + '\n' +
+                       'Serial Number = ' + this.serialnumber + '\n' +
+                       'Equipment is ' + getAge(initialDate) + ' years old';
+          alert(string);
+          };
+      };
+    
+    // instantiate Asset
+    var asset1 = new Asset('Garmin', 'Montana 680', '1a2b3c4e5d6f7g8h9i','used','2015/01/31');
+      
+    //add method to Asset after the fact
+    Asset.prototype.decommission = function() {
+      alert(this.model + ' with a serial number of ' + this.serialnumber + ' will be decommissioned.');
+    };
+    
+    function ScubaTankAsset(make, model, serialnumber, condition, startdate, material ,lasthydrotest) {
+      Asset.call(this,make, model, serialnumber, condition, startdate);
+      this.material = material;
+      this.lasthydrotest = lasthydrotest;
+    }
+    //make SubaTankAsset inherit prototype of standard Asset
+    ScubaTankAsset.prototype = Object.create(Asset.prototype);
+    //force ScubaTankAsset to use it's own constructor
+    ScubaTankAsset.prototype.constructor = ScubaTankAsset;
+    
+    //add method to ScubaTankAsset
+      ScubaTankAsset.prototype.hydrocheck = function() {
+        var testDate = new Date(this.lasthydrotest);
+        var today = new Date();
+        var testAge = getAge(testDate);
+
+          if (testAge >3) {
+            alert('Test Performed ' + testAge + ' years ago. \n'+ 'New Hydrostatic Test Required');
+          }else{
+            alert('Test Performed ' + testAge + ' years ago. \n'+ 'Hydrostatic Test Not Required');
+          }
+      };
+     
+    var scubatank1 = new ScubaTankAsset('XS Scuba', 'Faber High Pressure Steel Tank', 'dk539dk6dkfA','used','1971/08/24','steel', '2014/07/04' );
+
+    </script>
+</html>

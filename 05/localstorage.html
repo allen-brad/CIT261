@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!--
+created by Brad R. Allen
+-->
+<html>
+  <head>
+    <title>XMLHTTPRequest</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/sandbox.css">
+    <script src="./scripts/scriptOutput.js"></script>
+    <script src="./scripts/script261.js"></script>
+  </head>
+  <body>
+    <div>
+      <h1>Using XMLHTTPRequest to Consume a JSON Web Service</h1>
+      <button type="button" onclick="getObjectiveLinks()">Add URLs to Local Storage</button>
+      <textarea id="scriptOutput"></textarea>
+    </div>
+    <script>
+      // get objective links in JSON format and add them separately to local storage
+      function getObjectiveLinks(){
+        var url = "http://localhost/cit261/objectives/?action=getObjectivesURLs&t=" + Math.random(); //random number prevents browser from caching
+        // live var objectivesURL = "http://cit261.bradrallen.com/objectives/?action=getObjectivesURLs&t=" + Math.random();
+
+        getJSON(url).then(function(objectivesURLs){
+          objectivesURLs.forEach(function(url){
+            //take each link and store it in local storage ,
+            window.localStorage.setItem(url.objectiveID, JSON.stringify(url));
+            
+            //now go get it from local storage to prove that it's there by outputing it to the textarea
+            var localURL = JSON.parse(window.localStorage.getItem(url.objectiveID));
+            var textarea = document.getElementById("scriptOutput");
+            var text = document.createTextNode('Link for Objective ' + localURL.objectiveID + ' added to local storage!\n');
+            textarea.appendChild(text);
+           }); 
+        },function(error){
+          console.log(error);
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -16,11 +16,21 @@ switch ($action) {
     case 'getObjectives':
       // Get the array of objectives
       $objectives = getObjectives();
-      $objectivesURLs = getObjectivesURLs();
-      if(!count($objectives) && !count($objectivesURLs)){
-        echo "<p class='red'>Sorry, no objectives or URLs could be found.</p>";
+      if(!count($objectives)){
+        echo "<p class='red'>Sorry, no objectives could be found.</p>";
       } else {
-         $json = json_encode($objectives + $objectivesURLs);
+         $json = json_encode($objectives);
+         echo $json;
+      }
+      break;
+      
+    case 'getObjectivesURLs':
+      // Get the array of objectives
+      $objectivesURLs = getObjectivesURLs();
+      if(!count($objectivesURLs)){
+        echo "<p class='red'>Sorry, no URLs could be found.</p>";
+      } else {
+         $json = json_encode ($objectivesURLs);
          echo $json;
       }
       break;
@@ -38,26 +48,24 @@ switch ($action) {
     break;
     
     case 'addObjective':
-        // JSON string
-        //$incomingJSON = '[{"objectiveNum":"99","objectiveDesc":"this is a test objective","fluencyLevel":"not graded"}]';
-        //
+        
         // Handling data in JSON format on the server-side using PHP
         header("Content-Type: application/json");
         
         // build a PHP variable from JSON sent using POST method
         $incomingJSON = stripslashes(file_get_contents("php://input"));
-        
-        // build a PHP variable from JSON sent using GET method
-        //$incomingJSON = stripslashes($_GET["data"]);
 
         // Convert JSON string to Object
         $jsonObject = json_decode($incomingJSON);
-        print_r($jsonObject);      // Dump all data of the Object
-        //echo $jsonObject->objectiveNum . "\n"; // Access Object data
-        
-        foreach($jsonObject as $key => $value) {
-        echo $value->objectiveNum . ", " . $value->objectiveDesc . ", " . $value->fluencyLevel .  "\n";
+        if(!$jsonObject){
+          echo'Valid Objective Not Sent';
         }
+        print_r($jsonObject);      // Dump all data of the Object
+//        echo $jsonObject->objectiveNum . "\n"; // Access Object data
+//
+//        foreach($jsonObject as $key => $value) {
+//        echo $value->objectiveNum . ", " . $value->objectiveDesc . ", " . $value->fluencyLevel .  "\n";
+//        }
         break;
     default:
       echo "hello world";

@@ -9,44 +9,76 @@ created by Brad R. Allen
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/sandbox.css">
     <script src="./scripts/scriptOutput.js"></script>
+    <script src="./scripts/utilities.js" ></script>
+
   </head>
   <body>
-    <div>Example Loops, Conditional Statements, Functions, Variables, Parameters, Arrays and Associative Arrays</div>
+    <div>Example Object Creation Functions, Inheritance, Properties, Methods, Instantiation</div>
       <textarea id="scriptOutput"></textarea>
+      <br>
+      <button onclick="asset1.snapshot()">Snapshot of Asset 1</button>
+      <br><br>
+      <button onclick="scubatank1.hydrocheck()">Check Scuba Tank Safety</button>
     <script>
-      
-      //example of simple array
-      var group3 = ["Brad R. Allen","Lauren Allred","Jacob Barrera Loredo","Juan del Prado", "Keith Jacobson","Kent Roper","Alex Schwitters","Hayden Simmons"];
-      
-      //example of multidimensional array
-      var brands = [["Volkswagen",142498], ["Renault",95781], ["Audi",63154], ["Peugot",58294], ["Ford",58038], ["Opel / Vauxhall",55403],["Mercedes",52321],["Skoda",52241],["BMW",48147],["Toyota",48049]];
-      
-      //function to calculate the percentage of registrations
-      var percentage = new Function('percent','percentOf', 'return ((percent/percentOf)*100)');
-      
-      //get total car registartions from brands array to be used when calculating brand percentage
-      var totalRegistrations = 0;
-      brands.forEach(function(brand){
-        totalRegistrations += brand[1];
-      });
-      
-      //example of simple for loop
-      var text = "Members of Group 03 include:\n";
-      for (i = 0; i < group3.length; i++) {
-        text += group3[i] + '\n';
+      // object creation
+      function Asset(make, model, serialnumber, condition, startdate) {
+        //members
+        this.make = make;
+        this.model = model;
+        this.serialnumber = serialnumber;
+        this.condition = condition;
+        this.startdate = startdate;
         
-        //example of conditional statement
-        if (i === group3.length-1){
-          text += "\n"; //add extra line break on last member of the group
-        }
+        //methods
+        this.snapshot = function() {
+          var initialDate = this.startdate;
+          var string = 'Make = ' + this.make + '\n' + 
+                       'Model = ' + this.model + '\n' +
+                       'Serial Number = ' + this.serialnumber + '\n' +
+                       'Equipment is ' + getAge(initialDate) + ' years old';
+          alert(string);
+          };
+      };
+    
+      // instantiate Asset
+      var asset1 = new Asset('Garmin', 'Montana 680', '1a2b3c4e5d6f7g8h9i','used','2015/01/31');
+
+      //add method to Asset after the fact
+      Asset.prototype.decommission = function() {
+        alert(this.model + ' with a serial number of ' + this.serialnumber + ' will be decommissioned.');
+      };
+
+      function ScubaTankAsset(make, model, serialnumber, condition, startdate, material ,lasthydrotest) {
+        Asset.call(this,make, model, serialnumber, condition, startdate);
+        this.material = material;
+        this.lasthydrotest = lasthydrotest;
       }
+      //make SubaTankAsset inherit prototype of standard Asset
+      ScubaTankAsset.prototype = Object.create(Asset.prototype);
+      //force ScubaTankAsset to use it's own constructor
+      ScubaTankAsset.prototype.constructor = ScubaTankAsset;
+
+      //add method to ScubaTankAsset
+        ScubaTankAsset.prototype.hydrocheck = function() {
+          var testDate = new Date(this.lasthydrotest);
+          var today = new Date();
+          var testAge = getAge(testDate);
+
+            if (testAge >3) {
+              alert('Test Performed ' + testAge + ' years ago. \n'+ 'New Hydrostatic Test Required');
+            }else{
+              alert('Test Performed ' + testAge + ' years ago. \n'+ 'Hydrostatic Test Not Required');
+            }
+        };
+
+      var scubatank1 = new ScubaTankAsset('XS Scuba', 'Faber High Pressure Steel Tank', 'dk539dk6dkfA','used','1971/08/24','steel', '2014/07/04' );
+      var text = 'asset1 Model = ' + asset1.model + '\n';
+      text += 'scubatank1 Model = ' + scubatank1.model + '\n';
+      text += 'scubatank1 Material = ' + scubatank1.material + '\n';
       
-      //example of forEach iteration through a multidimenisonal array
-      text += "Best-selling car brands in EU-28 in August 2018, based on new-car registrations:\n";
-      brands.forEach(function(brand){
-        text += brand[0] + ' = ' + brand[1].toLocaleString() + ' which is ' + percentage(brand[1],totalRegistrations).toFixed(2) + '%\n';
-      });
-      
+      function tankCheck(){
+        scubatank1.hydrocheck();
+      };
       show(text);
     </script>
   </body>
