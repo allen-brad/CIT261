@@ -79,7 +79,6 @@
       var theLink = document.createElement("a");
       var theLinkText = document.createTextNode(objectiveLink.urlDescription);
       theLink.setAttribute('href', objectiveLink.url);
-    // live theLink.setAttribute('href', "http://cit261.bradrallen.com/sandbox.html?objective=01&page=loops");
       theLink.setAttribute('target', '_blank');
       theLink.appendChild(theLinkText);
       theBack.appendChild(theLink);
@@ -137,8 +136,8 @@ function addCards() {
   //get the objective URLs and put them in local storage for use later
   getObjectiveLinks();
   
-  var objectivesURL = "http://localhost/cit261/objectives/?action=getObjectives&t=" + Math.random(); //random number prevents browser from caching
-  // live var objectivesURL = "http://cit261.bradrallen.com/objectives/?action=getObjectives&t=" + Math.random();
+  // localhost var objectivesURL = "http://localhost/cit261/objectives/?action=getObjectives&t=" + Math.random(); //random number prevents browser from caching
+  var objectivesURL = "http://cit261.bradrallen.com/objectives/?action=getObjectives&t=" + Math.random();
 
   getJSON(objectivesURL).then(function(objectives){
     //then loop through objectives and create a card for each
@@ -155,8 +154,8 @@ function addCards() {
             card.classList.toggle('flipped');
   }
   function getObjectiveLinks(){
-    var url = "http://localhost/cit261/objectives/?action=getObjectivesURLs&t=" + Math.random(); //random number prevents browser from caching
-    // live var objectivesURL = "http://cit261.bradrallen.com/objectives/?action=getObjectivesURLs&t=" + Math.random();
+    // testing var url = "http://localhost/cit261/objectives/?action=getObjectivesURLs&t=" + Math.random(); //random number prevents browser from caching
+    var url = "http://cit261.bradrallen.com/objectives/?action=getObjectivesURLs&t=" + Math.random();
 
     getJSON(url).then(function(objectivesURLs){
       //store the result in local storage
