@@ -60,7 +60,11 @@
      // add usage paragraph
     var theUsage = document.createElement("p");
     theUsage.className = "usage";
-    var newUsageText = document.createTextNode(usage);
+    if (usage == null){
+      var newUsageText = document.createTextNode("not ready for grading");
+    }else{
+      var newUsageText = document.createTextNode(usage);
+    }
     theUsage.appendChild(newUsageText);
     
 
