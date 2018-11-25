@@ -20,8 +20,8 @@ created by Brad R. Allen
     <script>
       // get objective links in JSON format and add them separately to local storage
       function getObjectiveLinks(){
-        var url = "http://localhost/cit261/objectives/?action=getObjectivesURLs&t=" + Math.random(); //random number prevents browser from caching
-        // live var objectivesURL = "http://cit261.bradrallen.com/objectives/?action=getObjectivesURLs&t=" + Math.random();
+        // var url = "http://localhost/cit261/objectives/?action=getObjectivesURLs&t=" + Math.random(); //random number prevents browser from caching
+        var url = "objectives/?action=getObjectivesURLs&t=" + Math.random();
 
         getJSON(url).then(function(objectivesURLs){
           objectivesURLs.forEach(function(url){

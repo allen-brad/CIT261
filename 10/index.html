@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+   <meta charset="UTF-8"> 
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="../css/normalize.css">
+   <link rel="stylesheet" href="../css/screen.css">
+   <link href="https://fonts.googleapis.com/css?family=Zilla+Slab:400,500,700" rel="stylesheet">
+   <title>Canvas, Video, Audio</title>
+  </head>
+  <body>
+    <header>
+      <h1>CIT 261 Objective Dashboard</h1>
+      <h2>Brad R. Allen</h2>
+    </header>
+    <div id="maincontent">
+      <canvas id="starChart" width="601" height="601">
+      </canvas>
+      <div id="video" style="text-align:center">
+        <h2>X-Class Flare Outburst</h2>
+        <video id="flareVideo" width="420">
+          <source src="../videos/x-class_flare_outburst.mp4" type="video/mp4">
+          Your browser does not support HTML5 video.
+        </video><br><br>
+        <button onclick="playPause()">Play/Pause</button> 
+        <button onclick="makeBig()">Big</button>
+        <button onclick="makeSmall()">Small</button>
+        <button onclick="makeNormal()">Normal</button>
+        <p>credit: <a href="https://www.nasa.gov/multimedia/downloadable-video-page/">NASA</a> </p>
+      </div>
+      <p>Fun Sounds from NASA: Roger Roll!</p>
+      <audio controls>
+        <source src="../sounds/640170main_RogerRoll.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+    <script src="../scripts/script261.js" ></script>
+    <script>
+        document.body.onload = buildStarChart;
+    </script>
+  </body>
+</html>

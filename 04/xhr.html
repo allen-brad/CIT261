@@ -20,7 +20,8 @@ created by Brad R. Allen
       // Sending and receiving data in JSON format using POST method
       function createNewObj (){
         var xhr = new XMLHttpRequest();
-        var url = "http://localhost/cit261/objectives/?action=addObjective";
+        // local var url = "http://localhost/cit261/objectives/?action=addObjective";
+        var url = "objectives/?action=addObjective";
         xhr.open("POST", url, true);
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.onreadystatechange = function () {
